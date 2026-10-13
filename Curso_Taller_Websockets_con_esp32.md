@@ -137,9 +137,9 @@ platform = espressif32
 board = esp32dev
 framework = arduino
 monitor_speed = 115200
-lib_deps =
-    https://github.com/mathieucarbou/ESPAsyncWebServer.git
-    https://github.com/mathieucarbou/AsyncTCP.git
+lib_deps = 
+    mathieucarbou/ESPAsyncWebServer @ ^3.1.5
+    mathieucarbou/AsyncTCP @ ^3.1.4
 ```
 
 ---
@@ -250,7 +250,7 @@ Configurar el ESP32 en modo **Punto de Acceso Wi-Fi (AP)** independiente y habil
 #define LED_PIN 2
 
 const char* ssid = "ESP32_Taller_LED";
-const char* password = "password123";
+const char* password = "tecvictoria";
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
@@ -367,7 +367,7 @@ Demostrar la capacidad dúplex simultánea:
 #define LED_PIN 2
 
 const char* ssid = "ESP32_Telemetria_AP";
-const char* password = "password123";
+const char* password = "tecvictoria";
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
@@ -515,7 +515,7 @@ Integrar la tracción diferencial con la interfaz de control táctil.
 #define LED_PIN 2
 
 const char* ssid = "Robot_Movil_AP";
-const char* password = "robot12345";
+const char* password = "tecvictoria";
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
@@ -744,7 +744,7 @@ Evitar conflictos cuando varios alumnos se conectan a la misma red Wi-Fi:
 #define LED_PIN 2
 
 const char* ssid = "Robot_Movil_AP";
-const char* password = "robot12345";
+const char* password = "tecvictoria";
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
