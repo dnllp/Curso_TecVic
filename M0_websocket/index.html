@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Estado: <span id="status">Desconectado</span></h3>
+  <input type="text" id="msg" placeholder="Mensaje..." />
+  <button onclick="enviar()">Enviar</button>
+  <pre id="log"></pre>
+
+  <script>
+    let socket;
+    const log = document.getElementById('log');
+    const status = document.getElementById('status');
+
+    function conectar() {
+      status.innerText = "Conectando...";
+      socket = new WebSocket("ws://localhost:8080");
+
+      socket.onopen = () => {
+        status.innerText = "Conectado";
+        status.style.color = "green";
+      };
+
+      socket.onmessage = (event) => {
+        log.textContent += event.data + "\n";
+      };
+
+      socket.onclose = () => {
+        status.innerText = "Desconectado. Reintentando en 2s...";
+        status.style.color = "red";
+        // El secreto de la resiliencia en WebSockets: backoff / retry
+        setTimeout(conectar, 2000);
+      };
+
+      socket.onerror = (err) => {
+        socket.close();
+      };
+    }
+
+    function enviar() {
+      const input = document.getElementById('msg');
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({ text: input.value, timestamp: Date.now() }));
+        input.value = '';
+      }
+    }
+
+    conectar();
+  </script>
+</body>
+</html>
